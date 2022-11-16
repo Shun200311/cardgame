@@ -1,0 +1,26 @@
+﻿  ソース.cpp
+C:\Users\cash2\Documents\cardgame\ソース.cpp(194,55): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(197,63): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(197,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(258,54): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(258,32): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(261,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(261,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(264,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(264,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(267,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(267,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(270,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(270,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(273,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(273,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(276,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(276,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(104,6): warning C4101: 'receive2': ローカル変数は 1 度も使われていません。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(102,7): warning C4101: 'StrBuf': ローカル変数は 1 度も使われていません。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(116,9): warning C4101: 'ip': ローカル変数は 1 度も使われていません。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(118,6): warning C4101: 'DataLength': ローカル変数は 1 度も使われていません。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(117,17): warning C4101: 'LostHandle': ローカル変数は 1 度も使われていません。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(117,6): warning C4101: 'NetHandle': ローカル変数は 1 度も使われていません。
+C:\Users\cash2\Documents\cardgame\ソース.cpp(97): warning C4715: 'input': 値を返さないコントロール パスがあります。
+  cardgame.vcxproj -> C:\Users\cash2\Documents\cardgame\x64\Debug\cardgame.exe
