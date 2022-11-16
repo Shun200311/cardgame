@@ -113,7 +113,6 @@ int input(void) {
 	else if (gamestep == 1) {
 		while (1) {
 			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-				GetMousePoint(&mouseX, &mouseY);
 				if (Card1->mouse_in()) {
 					return 1;
 				}
@@ -142,7 +141,6 @@ int input(void) {
 	}
 	else if (gamestep == 2) {
 		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			GetMousePoint(&mouseX, &mouseY);
 			if (Charaenter->mouse_in()) {
 				return 1;
 			}
@@ -154,7 +152,6 @@ int input(void) {
 	//DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0,
 	else if (gamestep == 3) {
 		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			GetMousePoint(&mouseX, &mouseY);
 			if (Skill->mouse_in()) {
 				if (skillbt == 0) {
 					return 1;
