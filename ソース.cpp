@@ -12,6 +12,11 @@ int dx = 0;
 int eriaX, eriaY;
 //プログラム内の「位置」のクラス
 //位置とサイズをウィンドウ比で計算
+bool mouse_in_area(int startX,int startY, int endX, int endY) {
+	int mouseX = 0, mouseY = 0;
+	GetMousePoint(&mouseX, &mouseY);
+	return (mouseX >= startX && mouseX <= endX && mouseY >= startY && mouseY <= endY);
+}
 class WindowArea {
 public:
 	int startX, startY, endX, endY;
@@ -23,10 +28,15 @@ public:
 	}
 	// マウスのクリック位置判定関数
 	bool mouse_in() {
-		int mouseX = 0, mouseY = 0;
-		GetMousePoint(&mouseX, &mouseY);
-		return (mouseX >= this->startX && mouseX <= this->endX && mouseY >= this->startY && mouseY <= this->endY);
+		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
 	}
+	void DrawExtend(const TCHAR* path) {
+		DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, LoadGraph(path), true);
+	}
+	void DrawRota(double exRate, const TCHAR* path) {
+		DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, LoadGraph(path), true);
+	}
+
 };
 class WindowArea2 {
 public:
@@ -56,9 +66,13 @@ public:
 	}
 	// マウスのクリック位置判定関数
 	bool mouse_in() {
-		int mouseX = 0, mouseY = 0;
-		GetMousePoint(&mouseX, &mouseY);
-		return (mouseX >= startX && mouseX <= endX && mouseY >= startY && mouseY <= endY);
+		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
+	}
+	void DrawExtend(const TCHAR* path) {
+		DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, LoadGraph(path), true);
+	}
+	void DrawRota(double exRate, const TCHAR* path) {
+		DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, LoadGraph(path), true);
 	}
 };
 //位置はウィンドウ比、サイズは固定
