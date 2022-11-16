@@ -1,30 +1,58 @@
 ﻿  ソース.cpp
-D:\usr\Documents\C Program\cardgame\ソース.cpp(36,28): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(37,28): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(229,73): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(230,74): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(244,55): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(247,63): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(247,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(308,54): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(308,32): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(311,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(311,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(314,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(314,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(317,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(317,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(320,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(320,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(323,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(323,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(326,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(326,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(140,6): warning C4101: 'receive2': ローカル変数は 1 度も使われていません。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(138,7): warning C4101: 'StrBuf': ローカル変数は 1 度も使われていません。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(153,9): warning C4101: 'ip': ローカル変数は 1 度も使われていません。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(155,6): warning C4101: 'DataLength': ローカル変数は 1 度も使われていません。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(154,17): warning C4101: 'LostHandle': ローカル変数は 1 度も使われていません。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(154,6): warning C4101: 'NetHandle': ローカル変数は 1 度も使われていません。
-D:\usr\Documents\C Program\cardgame\ソース.cpp(133): warning C4715: 'input': 値を返さないコントロール パスがあります。
-  cardgame.vcxproj -> D:\usr\Documents\C Program\cardgame\x64\Debug\cardgame.exe
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(19,34): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(20,34): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(21,29): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(22,29): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(35,34): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(36,34): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(37,29): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(38,29): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(52,27): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(53,27): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(69,28): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(70,28): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(77,33): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(250,73): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(251,74): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(252,58): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(252,36): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(253,58): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(253,36): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(254,58): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(254,36): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(255,58): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(255,36): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(256,58): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(256,36): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(257,58): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(257,36): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(258,58): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(258,36): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(259,76): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(260,75): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(261,51): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(276,55): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(279,63): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(279,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(340,54): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(340,32): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(343,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(343,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(346,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(346,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(349,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(349,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(352,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(352,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(355,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(355,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(358,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(358,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(161,6): warning C4101: 'receive2': ローカル変数は 1 度も使われていません。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(159,7): warning C4101: 'StrBuf': ローカル変数は 1 度も使われていません。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(174,9): warning C4101: 'ip': ローカル変数は 1 度も使われていません。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(176,6): warning C4101: 'DataLength': ローカル変数は 1 度も使われていません。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(175,17): warning C4101: 'LostHandle': ローカル変数は 1 度も使われていません。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(175,6): warning C4101: 'NetHandle': ローカル変数は 1 度も使われていません。
+C:\Users\cash2\source\repos\Shun200311\cardgame\ソース.cpp(154): warning C4715: 'input': 値を返さないコントロール パスがあります。
+  cardgame.vcxproj -> C:\Users\cash2\source\repos\Shun200311\cardgame\x64\Debug\cardgame.exe
