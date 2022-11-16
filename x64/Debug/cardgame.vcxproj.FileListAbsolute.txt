@@ -1,2 +1,3 @@
 C:\Users\cash2\Documents\cardgame\x64\Debug\cardgame.exe
 D:\usr\Documents\C Program\cardgame\x64\Debug\cardgame.exe
+C:\Users\cash2\source\repos\Shun200311\cardgame\x64\Debug\cardgame.exe

@@ -38,6 +38,22 @@ public:
 	}
 
 };
+class WindowArea2 {
+public:
+	int startX, startY, endX, endY;
+	WindowArea2(float posX, float posY, float sizeX, float sizeY) {
+		this->startX = (float)window_y * posX;
+		this->startY = (float)window_y * posY;
+		this->endX = this->startX + (float)window_y * sizeX;
+		this->endY = this->startY + (float)window_y * sizeY;
+	}
+	// マウスのクリック位置判定関数
+	bool mouse_in() {
+		int mouseX = 0, mouseY = 0;
+		GetMousePoint(&mouseX, &mouseY);
+		return (mouseX >= this->startX && mouseX <= this->endX && mouseY >= this->startY && mouseY <= this->endY);
+	}
+};
 //位置はウィンドウ比、サイズは固定
 class ConstArea {
 public:
@@ -59,8 +75,27 @@ public:
 		DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, LoadGraph(path), true);
 	}
 };
-WindowArea* HostButtun,* GuestButton;
-
+//位置はウィンドウ比、サイズは固定
+class CircleArea {
+public:
+	int centerX, centerY, r;
+	CircleArea(float posX, float posY, int size) {
+		this->centerX = window_x * posX;
+		this->centerY = window_y * posY;
+		this->r = size;
+	}
+	// マウスのクリック位置判定関数
+	bool mouse_in() {
+		int mouseX = 0, mouseY = 0;
+		GetMousePoint(&mouseX, &mouseY);
+		dx = (pow(mouseX - centerX,2) + pow(mouseY - centerY,2));
+		return (sqrt(dx)<=r);
+	}
+};
+WindowArea* HostButtun, * GuestButton;
+WindowArea2*Charaenter, * Charaback;
+ConstArea* Card1,* Card2,* Card3,* Card4,* Card5, * Card6, * Card7;
+CircleArea* Skill;
 int input(void) {
 	WaitKey();
 	if (gamestep == 0) {
@@ -79,31 +114,28 @@ int input(void) {
 		while (1) {
 			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 				GetMousePoint(&mouseX, &mouseY);
-				if ((mouseY >= (window_y / 5) * 1.5 - (y / 2)) && (mouseY <= (window_y / 5) * 1.5 + (y / 2))) {
-					if ((mouseX >= ((window_x / 5) * 1) - (x / 2)) && ( mouseX <= ((window_x / 5) * 1) + (x / 2))) {
-						return 1;
-					}
-					else if ((mouseX >= (window_x / 5) * 2 - (x / 2)) && (mouseX <= (window_x / 5) * 2 + (x / 2))) {
-						return 2;
-					}
-					else if ((mouseX >= (window_x / 5) * 3 - (x / 2)) && (mouseX <= (window_x / 5) * 3 + (x / 2))) {
-						return 3;
-					}
-					else if ((mouseX >= (window_x / 5) * 4 - (x / 2)) && (mouseX <= (window_x / 5) * 4 + (x / 2))) {
-						return 4;
-					}
+				if (Card1->mouse_in()) {
+					return 1;
 				}
-				else if ((mouseY >= (window_y / 5) * 3.5 - (y / 2)) && (mouseY <= (window_y / 5) * 3.5 + (y / 2))) {
-					if ((mouseX >= (window_x / 5) * 1.5 - (x / 2)) && (mouseX <= (window_x / 5) * 1.5 + (x / 2))) {
-						return 5;
-					}
-					else if ((mouseX >= (window_x / 5) * 2.5 - (x / 2)) && (mouseX <= (window_x / 5) * 2.5 + (x / 2))) {
-						return 6;
-					}
-					else if ((mouseX >= (window_x / 5) * 3.5 - (x / 2)) && (mouseX <= (window_x / 5) * 3.5 + (x / 2))) {
-						return 7;
-					}
+				else if (Card2->mouse_in()) {
+					return 2;
 				}
+				else if (Card3->mouse_in()) {
+					return 3;
+				}
+				else if (Card4->mouse_in()) {
+					return 4;
+				}
+				else if (Card5->mouse_in()) {
+					return 5;
+				}
+				else if (Card6->mouse_in()) {
+					return 6;
+				}
+				else if (Card7->mouse_in()) {
+					return 7;
+				}
+				
 			}
 
 		}
@@ -111,13 +143,11 @@ int input(void) {
 	else if (gamestep == 2) {
 		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 			GetMousePoint(&mouseX, &mouseY);
-			if ((mouseY >= window_y * 3 / 4)&&(mouseY<=window_y)) {
-				if ((mouseX >= (window_y * 3 / 4) * 1 / 5) && (mouseX <= (window_y * 3 / 4) * 2 / 5)) {
-					return 1;
-				}
-				else if ((mouseX >= (window_y * 3 / 4) * 3 / 5) && (mouseX <= (window_y * 3 / 4) * 4 / 5)) {
-					return 2;
-				}
+			if (Charaenter->mouse_in()) {
+				return 1;
+			}
+			else if (Charaback->mouse_in()) {
+				return 2;
 			}
 		}
 	}
@@ -125,20 +155,13 @@ int input(void) {
 	else if (gamestep == 3) {
 		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 			GetMousePoint(&mouseX, &mouseY);
-			eriaX = (window_x / 10 * 9);
-			eriaY = (window_y / 5 * 4);
-			dx = ((mouseX - eriaX) * (mouseX - eriaX )) + ((mouseY - eriaY ) * (mouseY - eriaY ));
-			//dx = 4;
-			if (sqrt(dx)<256*0.75) {
+			if (Skill->mouse_in()) {
 				if (skillbt == 0) {
 					return 1;
 				}
 				else if (skillbt == 1) {
 					return 0;
 				}
-			}
-			else {
-				return skillbt;
 			}
 		}
 	}
@@ -236,10 +259,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	DrawBox(0, 0, 100, 100, GetColor(0, 0, 0), true);
 	DrawString((window_x / 5) * 1, (window_y / 6) * 4, "ホスト", GetColor(0, 0, 0));
 	DrawString((window_x / 5) * 3, (window_y / 6) * 4, "ゲスト", GetColor(0, 0, 0));
-	DrawString(0, 0, "start", GetColor(255, 255, 255));
+
 
 	HostButtun = new WindowArea(1.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
 	GuestButton = new WindowArea(3.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
+	Card1 = new ConstArea((1.0 / 5.0) - (x / 2),(1.5 / 5.0) - (y / 2), x, y);
+	Card2 = new ConstArea((2.0 / 5.0) - (x / 2),(1.5 / 5.0) - (y / 2), x, y);
+	Card3 = new ConstArea((3.0 / 5.0) - (x / 2),(1.5 / 5.0) - (y / 2), x, y);
+	Card4 = new ConstArea((4.0 / 5.0) - (x / 2),(1.5 / 5.0) - (y / 2), x, y);
+	Card5 = new ConstArea((1.5 / 5.0) - (x / 2),(3.5 / 5.0) - (y / 2), x, y);
+	Card6 = new ConstArea((2.5 / 5.0) - (x / 2),(3.5 / 5.0) - (y / 2), x, y);
+	Card7 = new ConstArea((3.5 / 5.0) - (x / 2),(3.5 / 5.0) - (y / 2), x, y);
+	Charaenter = new WindowArea2(3.0 / 20.0, 3.0 / 4.0, 1.0 / 20.0, 1.0 / 4.0);
+	Charaback = new WindowArea2(9.0 / 20.0, 3.0 / 4.0, 1.0 / 20.0, 1.0 / 4.0);
+	Skill = new CircleArea(9.0 / 10.0,4.0 / 5.0, 256);
+
 
 	connection_select = input();
 	//printfDx("%d", connection_select);
