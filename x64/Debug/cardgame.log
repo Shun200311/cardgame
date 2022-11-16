@@ -1,26 +1,30 @@
 ﻿  ソース.cpp
-C:\Users\cash2\Documents\cardgame\ソース.cpp(194,55): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(197,63): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(197,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(258,54): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(258,32): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(261,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(261,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(264,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(264,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(267,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(267,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(270,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(270,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(273,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(273,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(276,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(276,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(104,6): warning C4101: 'receive2': ローカル変数は 1 度も使われていません。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(102,7): warning C4101: 'StrBuf': ローカル変数は 1 度も使われていません。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(116,9): warning C4101: 'ip': ローカル変数は 1 度も使われていません。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(118,6): warning C4101: 'DataLength': ローカル変数は 1 度も使われていません。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(117,17): warning C4101: 'LostHandle': ローカル変数は 1 度も使われていません。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(117,6): warning C4101: 'NetHandle': ローカル変数は 1 度も使われていません。
-C:\Users\cash2\Documents\cardgame\ソース.cpp(97): warning C4715: 'input': 値を返さないコントロール パスがあります。
-  cardgame.vcxproj -> C:\Users\cash2\Documents\cardgame\x64\Debug\cardgame.exe
+D:\usr\Documents\C Program\cardgame\ソース.cpp(36,28): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(37,28): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(229,73): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(230,74): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(244,55): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(247,63): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(247,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(308,54): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(308,32): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(311,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(311,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(314,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(314,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(317,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(317,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(320,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(320,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(323,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(323,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(326,61): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(326,35): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(140,6): warning C4101: 'receive2': ローカル変数は 1 度も使われていません。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(138,7): warning C4101: 'StrBuf': ローカル変数は 1 度も使われていません。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(153,9): warning C4101: 'ip': ローカル変数は 1 度も使われていません。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(155,6): warning C4101: 'DataLength': ローカル変数は 1 度も使われていません。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(154,17): warning C4101: 'LostHandle': ローカル変数は 1 度も使われていません。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(154,6): warning C4101: 'NetHandle': ローカル変数は 1 度も使われていません。
+D:\usr\Documents\C Program\cardgame\ソース.cpp(133): warning C4715: 'input': 値を返さないコントロール パスがあります。
+  cardgame.vcxproj -> D:\usr\Documents\C Program\cardgame\x64\Debug\cardgame.exe

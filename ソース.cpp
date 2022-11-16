@@ -1,5 +1,7 @@
 #include "DxLib.h"
 #include <math.h>
+#include <string>
+#include <vector>
 
 int window_x, window_y, color;
 int x, y;
@@ -8,21 +10,53 @@ int gamestep = 0;
 int skillbt = 0;
 int dx = 0;
 int eriaX, eriaY;
+//プログラム内の「位置」のクラス
+//位置とサイズをウィンドウ比で計算
+class WindowArea {
+public:
+	int startX, startY, endX, endY;
+	WindowArea(float posX, float posY, float sizeX, float sizeY) {
+		this->startX = (float)window_x * posX;
+		this->startY = (float)window_y * posY;
+		this->endX = this->startX + (float)window_x * sizeX;
+		this->endY = this->startY + (float)window_y * sizeY;
+	}
+	// マウスのクリック位置判定関数
+	bool mouse_in() {
+		int mouseX = 0, mouseY = 0;
+		GetMousePoint(&mouseX, &mouseY);
+		return (mouseX >= this->startX && mouseX <= this->endX && mouseY >= this->startY && mouseY <= this->endY);
+	}
+};
+//位置はウィンドウ比、サイズは固定
+class ConstArea {
+public:
+	int startX, startY, endX, endY;
+	ConstArea(float posX, float posY, int sizeX, int sizeY) {
+		this->startX = window_x * posX;
+		this->startY = window_y * posY;
+		this->endX = this->startX + sizeX;
+		this->endY = this->startY + sizeY;
+	}
+	// マウスのクリック位置判定関数
+	bool mouse_in() {
+		int mouseX = 0, mouseY = 0;
+		GetMousePoint(&mouseX, &mouseY);
+		return (mouseX >= startX && mouseX <= endX && mouseY >= startY && mouseY <= endY);
+	}
+};
+WindowArea* HostButtun,* GuestButton;
+
 int input(void) {
-	mouseX = 0;
-	mouseY = 0;
 	WaitKey();
 	if (gamestep == 0) {
 		while (1) {
 			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-				GetMousePoint(&mouseX, &mouseY);
-				if ((mouseY >= (window_y / 6) * 4) && (mouseY <= (window_y / 6) * 5)) {
-					if ((mouseX >= (window_x / 5) * 1) && (mouseX <= (window_x / 5) * 2)) {
-						return 1;
-					}
-					else if ((mouseX >= (window_x / 5) * 3) && (mouseX <= (window_x / 5) * 4)) {
-						return 2;
-					}
+				if (HostButtun->mouse_in()) {
+					return 1;
+				}
+				else if (GuestButton->mouse_in()) {
+					return 2;
 				}
 			}
 		}
@@ -189,6 +223,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	DrawString((window_x / 5) * 1, (window_y / 6) * 4, "ホスト", GetColor(0, 0, 0));
 	DrawString((window_x / 5) * 3, (window_y / 6) * 4, "ゲスト", GetColor(0, 0, 0));
 	DrawString(0, 0, "start", GetColor(255, 255, 255));
+
+	HostButtun = new WindowArea(1.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
+	GuestButton = new WindowArea(3.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
 
 	connection_select = input();
 	//printfDx("%d", connection_select);
