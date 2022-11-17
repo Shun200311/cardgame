@@ -11,7 +11,6 @@ int gamestep = 0;
 int skillbt = 0;
 int dx = 0;
 int eriaX, eriaY;
-};
 class WindowArea2 {
 public:
 	int startX, startY, endX, endY;
