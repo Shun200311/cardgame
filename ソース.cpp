@@ -1,22 +1,72 @@
-#include "DxLib.h"
+#include <DxLib.h>
 #include <math.h>
 #include <string>
 #include <vector>
 #include "Area.h"
-int color;
+
+int window_x, window_y, color;
 int x, y;
 int mouseX, mouseY;
 int gamestep = 0;
 int skillbt = 0;
 int eriaX, eriaY;
-
 WindowArea* HostButtun, * GuestButton;
-WindowArea2* Charaenter, * Charaback;
-ConstArea* Card[7];
+WindowArea2*Charaenter, * Charaback;
+ConstArea* Chara_Card[7];
 CircleArea* Skill;
+int input(void) {
+	WaitKey();
+	if (gamestep == 0) {
+		while (1) {
+			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+				if (HostButtun->mouse_in()) {
+					return 1;
+				}
+				else if (GuestButton->mouse_in()) {
+					return 2;
+				}
+			}
+		}
+	}
+	else if (gamestep == 1) {
+		while (1) {
+			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+				for(int i=0;i<7;i++){
+					if (Chara_Card[i]->mouse_in()) {
+						return i+1;
+					}
+				}
+				
+			}
 
-int input();
-
+		}
+	}
+	else if (gamestep == 2) {
+		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+			GetMousePoint(&mouseX, &mouseY);
+			if (Charaenter->mouse_in()) {
+				return 1;
+			}
+			else if (Charaback->mouse_in()) {
+				return 2;
+			}
+		}
+	}
+	//DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0,
+	else if (gamestep == 3) {
+		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+			GetMousePoint(&mouseX, &mouseY);
+			if (Skill->mouse_in()) {
+				if (skillbt == 0) {
+					return 1;
+				}
+				else if (skillbt == 1) {
+					return 0;
+				}
+			}
+		}
+	}
+}
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//ChangeWindowMode(false);
 	SetGraphMode(1920, 1080,32);
@@ -114,15 +164,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	HostButtun = new WindowArea(1.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
 	GuestButton = new WindowArea(3.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
-	Card[0] = new ConstArea((1.0 / 5.0), (1.5 / 5.0), x, y);
-	Card[1] = new ConstArea((2.0 / 5.0), (1.5 / 5.0), x, y);
-	Card[2] = new ConstArea((3.0 / 5.0), (1.5 / 5.0), x, y);
-	Card[3] = new ConstArea((4.0 / 5.0), (1.5 / 5.0), x, y);
-	Card[4] = new ConstArea((1.5 / 5.0), (3.5 / 5.0), x, y);
-	Card[5] = new ConstArea((2.5 / 5.0), (3.5 / 5.0), x, y);
-	Card[6] = new ConstArea((3.5 / 5.0), (3.5 / 5.0), x, y);
-	Charaenter = new WindowArea2(3.0 / 20.0, 3.0 / 4.0, 3.0 / 20.0, 1.0 / 4.0);
-	Charaback = new WindowArea2(9.0 / 20.0, 3.0 / 4.0, 3.0 / 20.0, 1.0 / 4.0);
+	Chara_Card[0] = new ConstArea((1.0 / 5.0), (1.5 / 5.0), x, y);
+	Chara_Card[1] = new ConstArea((2.0 / 5.0), (1.5 / 5.0), x, y);
+	Chara_Card[2] = new ConstArea((3.0 / 5.0), (1.5 / 5.0), x, y);
+	Chara_Card[3] = new ConstArea((4.0 / 5.0), (1.5 / 5.0), x, y);
+	Chara_Card[4] = new ConstArea((1.5 / 5.0), (3.5 / 5.0), x, y);
+	Chara_Card[5] = new ConstArea((2.5 / 5.0), (3.5 / 5.0), x, y);
+	Chara_Card[6] = new ConstArea((3.5 / 5.0), (3.5 / 5.0), x, y);
+	Charaenter = new WindowArea2(3.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
+	Charaback = new WindowArea2(9.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
 	Skill = new CircleArea(9.0 / 10.0,4.0 / 5.0, 256);
 
 
@@ -183,8 +233,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				DrawExtendGraph(0, 0, window_y * 3 / 4, window_y * 3 / 4, charaex7, true);
 				DrawExtendGraph(window_y + 1, 0, window_x, window_y + 1, chara7, true);
 			}
-			DrawExtendGraph((window_y * 3 / 4) * 1 / 5, window_y * 3 / 4, (window_y * 3 / 4) * 2 / 5, window_y, red_botan, true);
-			DrawExtendGraph((window_y * 3 / 4) * 3 / 5, window_y * 3 / 4, (window_y * 3 / 4) * 4 / 5, window_y, blue_botan, true);
+			DrawExtendGraph((window_y * 3 / 4) * 1 / 5, window_y * 8 / 10, (window_y * 3 / 4) * 2 / 5, window_y * 9 / 10, red_botan, false);
+			DrawExtendGraph((window_y * 3 / 4) * 3 / 5, window_y * 8 / 10, (window_y * 3 / 4) * 4 / 5, window_y * 9 / 10, blue_botan, false);
 			goback = input();
 			if (goback == 1) {
 				chara_select = 2;
@@ -273,58 +323,4 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	DxLib_End();
 	return 0;
 
-}
-
-int input () {
-	WaitKey();
-	if (gamestep == 0) {
-		while (1) {
-			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-				if (HostButtun->mouse_in()) {
-					return 1;
-				}
-				else if (GuestButton->mouse_in()) {
-					return 2;
-				}
-			}
-		}
-	}
-	else if (gamestep == 1) {
-		while (1) {
-			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-				for (int i = 0; i < 7; i++) {
-					if (Card[i]->mouse_in()) {
-						return i + 1;
-					}
-				}
-
-			}
-
-		}
-	}
-	else if (gamestep == 2) {
-		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			GetMousePoint(&mouseX, &mouseY);
-			if (Charaenter->mouse_in()) {
-				return 1;
-			}
-			else if (Charaback->mouse_in()) {
-				return 2;
-			}
-		}
-	}
-	//DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0,
-	else if (gamestep == 3) {
-		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			GetMousePoint(&mouseX, &mouseY);
-			if (Skill->mouse_in()) {
-				if (skillbt == 0) {
-					return 1;
-				}
-				else if (skillbt == 1) {
-					return 0;
-				}
-			}
-		}
-	}
 }
