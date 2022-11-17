@@ -2,151 +2,21 @@
 #include <math.h>
 #include <string>
 #include <vector>
-
-int window_x, window_y, color;
+#include "Area.h"
+int color;
 int x, y;
 int mouseX, mouseY;
 int gamestep = 0;
 int skillbt = 0;
-int dx = 0;
 int eriaX, eriaY;
-//プログラム内の「位置」のクラス
-//位置とサイズをウィンドウ比で計算
-bool mouse_in_area(int startX,int startY, int endX, int endY) {
-	int mouseX = 0, mouseY = 0;
-	GetMousePoint(&mouseX, &mouseY);
-	return (mouseX >= startX && mouseX <= endX && mouseY >= startY && mouseY <= endY);
-}
-class WindowArea {
-public:
-	int startX, startY, endX, endY;
-	WindowArea(float posX, float posY, float sizeX, float sizeY) {
-		this->startX = (float)window_x * posX;
-		this->startY = (float)window_y * posY;
-		this->endX = this->startX + (float)window_x * sizeX;
-		this->endY = this->startY + (float)window_y * sizeY;
-	}
-	// マウスのクリック位置判定関数
-	bool mouse_in() {
-		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
-	}
-	void DrawExtend(const TCHAR* path) {
-		DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, LoadGraph(path), true);
-	}
-	void DrawRota(double exRate, const TCHAR* path) {
-		DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, LoadGraph(path), true);
-	}
 
-};
-class WindowArea2 {
-public:
-	int startX, startY, endX, endY;
-	WindowArea2(float posX, float posY, float sizeX, float sizeY) {
-		this->startX = (float)window_y * posX;
-		this->startY = (float)window_y * posY;
-		this->endX = this->startX + (float)window_y * sizeX;
-		this->endY = this->startY + (float)window_y * sizeY;
-	}
-	// マウスのクリック位置判定関数
-	bool mouse_in() {
-		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
-	}
-};
-//位置はウィンドウ比、サイズは固定
-class ConstArea {
-public:
-	int startX, startY, endX, endY;
-	ConstArea(float posX, float posY, int sizeX, int sizeY) {
-		this->startX = window_x * posX - (sizeX/2);
-		this->startY = window_y * posY - (sizeY/2);
-		this->endX = this->startX + sizeX;
-		this->endY = this->startY + sizeY;
-	}
-	// マウスのクリック位置判定関数
-	bool mouse_in() {
-		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
-	}
-	void DrawExtend(const TCHAR* path) {
-		DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, LoadGraph(path), true);
-	}
-	void DrawRota(double exRate, const TCHAR* path) {
-		DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, LoadGraph(path), true);
-	}
-};
-//位置はウィンドウ比、サイズは固定
-class CircleArea {
-public:
-	int centerX, centerY, r;
-	CircleArea(float posX, float posY, int size) {
-		this->centerX = window_x * posX;
-		this->centerY = window_y * posY;
-		this->r = size;
-	}
-	// マウスのクリック位置判定関数
-	bool mouse_in() {
-		int mouseX = 0, mouseY = 0;
-		GetMousePoint(&mouseX, &mouseY);
-		dx = (pow(mouseX - centerX,2) + pow(mouseY - centerY,2));
-		return (sqrt(dx)<=r);
-	}
-};
 WindowArea* HostButtun, * GuestButton;
-WindowArea2*Charaenter, * Charaback;
+WindowArea2* Charaenter, * Charaback;
 ConstArea* Card[7];
 CircleArea* Skill;
-int input(void) {
-	WaitKey();
-	if (gamestep == 0) {
-		while (1) {
-			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-				if (HostButtun->mouse_in()) {
-					return 1;
-				}
-				else if (GuestButton->mouse_in()) {
-					return 2;
-				}
-			}
-		}
-	}
-	else if (gamestep == 1) {
-		while (1) {
-			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-				for(int i=0;i<7;i++){
-					if (Card[i]->mouse_in()) {
-						return i+1;
-					}
-				}
-				
-			}
 
-		}
-	}
-	else if (gamestep == 2) {
-		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			GetMousePoint(&mouseX, &mouseY);
-			if (Charaenter->mouse_in()) {
-				return 1;
-			}
-			else if (Charaback->mouse_in()) {
-				return 2;
-			}
-		}
-	}
-	//DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0,
-	else if (gamestep == 3) {
-		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			GetMousePoint(&mouseX, &mouseY);
-			if (Skill->mouse_in()) {
-				if (skillbt == 0) {
-					return 1;
-				}
-				else if (skillbt == 1) {
-					return 0;
-				}
-			}
-		}
-	}
-}
+int input();
+
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//ChangeWindowMode(false);
 	SetGraphMode(1920, 1080,32);
@@ -403,4 +273,58 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	DxLib_End();
 	return 0;
 
+}
+
+int input () {
+	WaitKey();
+	if (gamestep == 0) {
+		while (1) {
+			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+				if (HostButtun->mouse_in()) {
+					return 1;
+				}
+				else if (GuestButton->mouse_in()) {
+					return 2;
+				}
+			}
+		}
+	}
+	else if (gamestep == 1) {
+		while (1) {
+			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+				for (int i = 0; i < 7; i++) {
+					if (Card[i]->mouse_in()) {
+						return i + 1;
+					}
+				}
+
+			}
+
+		}
+	}
+	else if (gamestep == 2) {
+		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+			GetMousePoint(&mouseX, &mouseY);
+			if (Charaenter->mouse_in()) {
+				return 1;
+			}
+			else if (Charaback->mouse_in()) {
+				return 2;
+			}
+		}
+	}
+	//DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0,
+	else if (gamestep == 3) {
+		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+			GetMousePoint(&mouseX, &mouseY);
+			if (Skill->mouse_in()) {
+				if (skillbt == 0) {
+					return 1;
+				}
+				else if (skillbt == 1) {
+					return 0;
+				}
+			}
+		}
+	}
 }
