@@ -3,5 +3,4 @@
 ################################################################################
 
 /.vscode/tasks.json
-/.vs/cardgame/v17/Browse.VC.opendb
-/.vs/cardgame/v17/Browse.VC.db-shm
+/.vs/**
