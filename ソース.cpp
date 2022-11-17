@@ -14,59 +14,7 @@ WindowArea* HostButtun, * GuestButton;
 WindowArea2*Charaenter, * Charaback;
 ConstArea* Chara_Card[7];
 CircleArea* Skill;
-int input(void) {
-	WaitKey();
-	if (gamestep == 0) {
-		while (1) {
-			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-				if (HostButtun->mouse_in()) {
-					return 1;
-				}
-				else if (GuestButton->mouse_in()) {
-					return 2;
-				}
-			}
-		}
-	}
-	else if (gamestep == 1) {
-		while (1) {
-			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-				for(int i=0;i<7;i++){
-					if (Chara_Card[i]->mouse_in()) {
-						return i+1;
-					}
-				}
-				
-			}
-
-		}
-	}
-	else if (gamestep == 2) {
-		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			GetMousePoint(&mouseX, &mouseY);
-			if (Charaenter->mouse_in()) {
-				return 1;
-			}
-			else if (Charaback->mouse_in()) {
-				return 2;
-			}
-		}
-	}
-	//DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0,
-	else if (gamestep == 3) {
-		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			GetMousePoint(&mouseX, &mouseY);
-			if (Skill->mouse_in()) {
-				if (skillbt == 0) {
-					return 1;
-				}
-				else if (skillbt == 1) {
-					return 0;
-				}
-			}
-		}
-	}
-}
+int input();
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//ChangeWindowMode(false);
 	SetGraphMode(1920, 1080,32);
@@ -323,4 +271,58 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	DxLib_End();
 	return 0;
 
+}
+
+int input() {
+	WaitKey();
+	if (gamestep == 0) {
+		while (1) {
+			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+				if (HostButtun->mouse_in()) {
+					return 1;
+				}
+				else if (GuestButton->mouse_in()) {
+					return 2;
+				}
+			}
+		}
+	}
+	else if (gamestep == 1) {
+		while (1) {
+			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+				for (int i = 0; i < 7; i++) {
+					if (Chara_Card[i]->mouse_in()) {
+						return i + 1;
+					}
+				}
+
+			}
+
+		}
+	}
+	else if (gamestep == 2) {
+		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+			GetMousePoint(&mouseX, &mouseY);
+			if (Charaenter->mouse_in()) {
+				return 1;
+			}
+			else if (Charaback->mouse_in()) {
+				return 2;
+			}
+		}
+	}
+	//DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0,
+	else if (gamestep == 3) {
+		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+			GetMousePoint(&mouseX, &mouseY);
+			if (Skill->mouse_in()) {
+				if (skillbt == 0) {
+					return 1;
+				}
+				else if (skillbt == 1) {
+					return 0;
+				}
+			}
+		}
+	}
 }
