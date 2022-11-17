@@ -49,9 +49,7 @@ public:
 	}
 	// マウスのクリック位置判定関数
 	bool mouse_in() {
-		int mouseX = 0, mouseY = 0;
-		GetMousePoint(&mouseX, &mouseY);
-		return (mouseX >= this->startX && mouseX <= this->endX && mouseY >= this->startY && mouseY <= this->endY);
+		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
 	}
 };
 //位置はウィンドウ比、サイズは固定
@@ -59,8 +57,8 @@ class ConstArea {
 public:
 	int startX, startY, endX, endY;
 	ConstArea(float posX, float posY, int sizeX, int sizeY) {
-		this->startX = window_x * posX;
-		this->startY = window_y * posY;
+		this->startX = window_x * posX - (sizeX/2);
+		this->startY = window_y * posY - (sizeY/2);
 		this->endX = this->startX + sizeX;
 		this->endY = this->startY + sizeY;
 	}
@@ -246,15 +244,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	HostButtun = new WindowArea(1.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
 	GuestButton = new WindowArea(3.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
-	Card[0] = new ConstArea((1.0 / 5.0) - (x / 2), (1.5 / 5.0) - (y / 2), x, y);
-	Card[1] = new ConstArea((2.0 / 5.0) - (x / 2), (1.5 / 5.0) - (y / 2), x, y);
-	Card[2] = new ConstArea((3.0 / 5.0) - (x / 2), (1.5 / 5.0) - (y / 2), x, y);
-	Card[3] = new ConstArea((4.0 / 5.0) - (x / 2), (1.5 / 5.0) - (y / 2), x, y);
-	Card[4] = new ConstArea((1.5 / 5.0) - (x / 2), (3.5 / 5.0) - (y / 2), x, y);
-	Card[5] = new ConstArea((2.5 / 5.0) - (x / 2), (3.5 / 5.0) - (y / 2), x, y);
-	Card[6] = new ConstArea((3.5 / 5.0) - (x / 2), (3.5 / 5.0) - (y / 2), x, y);
-	Charaenter = new WindowArea2(3.0 / 20.0, 3.0 / 4.0, 1.0 / 20.0, 1.0 / 4.0);
-	Charaback = new WindowArea2(9.0 / 20.0, 3.0 / 4.0, 1.0 / 20.0, 1.0 / 4.0);
+	Card[0] = new ConstArea((1.0 / 5.0), (1.5 / 5.0), x, y);
+	Card[1] = new ConstArea((2.0 / 5.0), (1.5 / 5.0), x, y);
+	Card[2] = new ConstArea((3.0 / 5.0), (1.5 / 5.0), x, y);
+	Card[3] = new ConstArea((4.0 / 5.0), (1.5 / 5.0), x, y);
+	Card[4] = new ConstArea((1.5 / 5.0), (3.5 / 5.0), x, y);
+	Card[5] = new ConstArea((2.5 / 5.0), (3.5 / 5.0), x, y);
+	Card[6] = new ConstArea((3.5 / 5.0), (3.5 / 5.0), x, y);
+	Charaenter = new WindowArea2(3.0 / 20.0, 3.0 / 4.0, 3.0 / 20.0, 1.0 / 4.0);
+	Charaback = new WindowArea2(9.0 / 20.0, 3.0 / 4.0, 3.0 / 20.0, 1.0 / 4.0);
 	Skill = new CircleArea(9.0 / 10.0,4.0 / 5.0, 256);
 
 
