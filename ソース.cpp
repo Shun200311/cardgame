@@ -46,6 +46,7 @@ public:
 		this->startY = (float)window_y * posY;
 		this->endX = this->startX + (float)window_y * sizeX;
 		this->endY = this->startY + (float)window_y * sizeY;
+		DrawBox(this->startX, this->startY, this->endX, this->endY, GetColor(255, 0, 0), true);
 	}
 	// マウスのクリック位置判定関数
 	bool mouse_in() {
@@ -92,7 +93,7 @@ public:
 };
 WindowArea* HostButtun, * GuestButton;
 WindowArea2*Charaenter, * Charaback;
-ConstArea* Card[7];
+ConstArea* Chara_Card[7];
 CircleArea* Skill;
 int input(void) {
 	WaitKey();
@@ -112,7 +113,7 @@ int input(void) {
 		while (1) {
 			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 				for(int i=0;i<7;i++){
-					if (Card[i]->mouse_in()) {
+					if (Chara_Card[i]->mouse_in()) {
 						return i+1;
 					}
 				}
@@ -244,15 +245,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	HostButtun = new WindowArea(1.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
 	GuestButton = new WindowArea(3.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
-	Card[0] = new ConstArea((1.0 / 5.0), (1.5 / 5.0), x, y);
-	Card[1] = new ConstArea((2.0 / 5.0), (1.5 / 5.0), x, y);
-	Card[2] = new ConstArea((3.0 / 5.0), (1.5 / 5.0), x, y);
-	Card[3] = new ConstArea((4.0 / 5.0), (1.5 / 5.0), x, y);
-	Card[4] = new ConstArea((1.5 / 5.0), (3.5 / 5.0), x, y);
-	Card[5] = new ConstArea((2.5 / 5.0), (3.5 / 5.0), x, y);
-	Card[6] = new ConstArea((3.5 / 5.0), (3.5 / 5.0), x, y);
-	Charaenter = new WindowArea2(3.0 / 20.0, 3.0 / 4.0, 3.0 / 20.0, 1.0 / 4.0);
-	Charaback = new WindowArea2(9.0 / 20.0, 3.0 / 4.0, 3.0 / 20.0, 1.0 / 4.0);
+	Chara_Card[0] = new ConstArea((1.0 / 5.0), (1.5 / 5.0), x, y);
+	Chara_Card[1] = new ConstArea((2.0 / 5.0), (1.5 / 5.0), x, y);
+	Chara_Card[2] = new ConstArea((3.0 / 5.0), (1.5 / 5.0), x, y);
+	Chara_Card[3] = new ConstArea((4.0 / 5.0), (1.5 / 5.0), x, y);
+	Chara_Card[4] = new ConstArea((1.5 / 5.0), (3.5 / 5.0), x, y);
+	Chara_Card[5] = new ConstArea((2.5 / 5.0), (3.5 / 5.0), x, y);
+	Chara_Card[6] = new ConstArea((3.5 / 5.0), (3.5 / 5.0), x, y);
+	Charaenter = new WindowArea2(3.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
+	Charaback = new WindowArea2(9.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
 	Skill = new CircleArea(9.0 / 10.0,4.0 / 5.0, 256);
 
 
@@ -313,8 +314,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				DrawExtendGraph(0, 0, window_y * 3 / 4, window_y * 3 / 4, charaex7, true);
 				DrawExtendGraph(window_y + 1, 0, window_x, window_y + 1, chara7, true);
 			}
-			DrawExtendGraph((window_y * 3 / 4) * 1 / 5, window_y * 3 / 4, (window_y * 3 / 4) * 2 / 5, window_y, red_botan, true);
-			DrawExtendGraph((window_y * 3 / 4) * 3 / 5, window_y * 3 / 4, (window_y * 3 / 4) * 4 / 5, window_y, blue_botan, true);
+			DrawExtendGraph((window_y * 3 / 4) * 1 / 5, window_y * 8 / 10, (window_y * 3 / 4) * 2 / 5, window_y * 9 / 10, red_botan, false);
+			DrawExtendGraph((window_y * 3 / 4) * 3 / 5, window_y * 8 / 10, (window_y * 3 / 4) * 4 / 5, window_y * 9 / 10, blue_botan, false);
 			goback = input();
 			if (goback == 1) {
 				chara_select = 2;
