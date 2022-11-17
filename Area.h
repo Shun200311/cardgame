@@ -1,4 +1,5 @@
 #pragma once
+#include <DxLib.h>
 int window_x, window_y, dx = 0;
 //プログラム内の「位置」のクラス
 //位置とサイズをウィンドウ比で計算
@@ -20,11 +21,14 @@ public:
 	bool mouse_in() {
 		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
 	}
-	void DrawExtend(const TCHAR* path) {
-		DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, LoadGraph(path), true);
+	int DrawExtendGraph(const TCHAR* path) {
+		return DxLib::DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, LoadGraph(path), true);
 	}
-	void DrawRota(double exRate, const TCHAR* path) {
-		DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, LoadGraph(path), true);
+	int DrawRotaGraph(double exRate, const TCHAR* path) {
+		return DxLib::DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, LoadGraph(path), true);
+	}
+	int DrawBox(unsigned int color, int fillflg) {
+		return DxLib::DrawBox(this->startX, this->startY, this->endX, this->endY, color, fillflg);
 	}
 
 };
@@ -56,11 +60,14 @@ public:
 	bool mouse_in() {
 		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
 	}
-	void DrawExtend(const TCHAR* path) {
-		DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, LoadGraph(path), true);
+	int DrawExtendGraph(const TCHAR* path) {
+		return DxLib::DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, LoadGraph(path), true);
 	}
-	void DrawRota(double exRate, const TCHAR* path) {
-		DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, LoadGraph(path), true);
+	int DrawRotaGraph(double exRate, const TCHAR* path) {
+		return DxLib::DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, LoadGraph(path), true);
+	}
+	int DrawBox(unsigned int color, int fillflg) {
+		return DxLib::DrawBox(this->startX, this->startY, this->endX, this->endY, color, fillflg);
 	}
 };
 //位置はウィンドウ比、サイズは固定
@@ -76,7 +83,6 @@ public:
 	bool mouse_in() {
 		int mouseX = 0, mouseY = 0;
 		GetMousePoint(&mouseX, &mouseY);
-		dx = (pow(mouseX - centerX, 2) + pow(mouseY - centerY, 2));
-		return (sqrt(dx) <= r);
+		return pow(mouseX - centerX, 2) + pow(mouseY - centerY, 2) <= pow(r,2);
 	}
 };

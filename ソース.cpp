@@ -25,8 +25,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int connection_select = 0;
 	int selection = 0;
 	int goback=0;
-	int chara1, chara2, chara3, chara4, chara5, chara6, chara7,chara7_2;
-	int charaex1, charaex2, charaex3, charaex4, charaex5, charaex6, charaex7;
+	int chara[7], chara7_2;
+	int charaex[7];
 	int card[9];
 	int back[8];
 	int red_botan;
@@ -53,22 +53,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	vs = LoadGraph("cardimage/vs.jpg");
 	backcard = LoadGraph("cardimage/backcard3.png");
 	playmat = LoadGraph("cardimage/playmat.png");
-	chara1 = LoadGraph("cardimage/キャラ01.png");
-	chara2 = LoadGraph("cardimage/キャラ02.png");
-	chara3 = LoadGraph("cardimage/キャラ03.png");
-	chara4 = LoadGraph("cardimage/キャラ04.png");
-	chara5 = LoadGraph("cardimage/キャラ05.png");
-	chara6 = LoadGraph("cardimage/キャラ06.png");
-	chara7 = LoadGraph("cardimage/キャラ07.png");
+	chara[0] = LoadGraph("cardimage/キャラ01.png");
+	chara[1] = LoadGraph("cardimage/キャラ02.png");
+	chara[2] = LoadGraph("cardimage/キャラ03.png");
+	chara[3] = LoadGraph("cardimage/キャラ04.png");
+	chara[4] = LoadGraph("cardimage/キャラ05.png");
+	chara[5] = LoadGraph("cardimage/キャラ06.png");
+	chara[6] = LoadGraph("cardimage/キャラ07.png");
 	chara7_2 = LoadGraph("cardimage/キャラ07-2.png");
 
-	charaex1 = LoadGraph("cardimage/キャラ1.jpg");
-	charaex2 = LoadGraph("cardimage/キャラ2.jpg");
-	charaex3 = LoadGraph("cardimage/キャラ3.jpg");
-	charaex4 = LoadGraph("cardimage/キャラ4.jpg");
-	charaex5 = LoadGraph("cardimage/キャラ5.jpg");
-	charaex6 = LoadGraph("cardimage/キャラ6.jpg");
-	charaex7 = LoadGraph("cardimage/キャラ7.jpg");
+	charaex[0] = LoadGraph("cardimage/キャラ1.jpg");
+	charaex[1] = LoadGraph("cardimage/キャラ2.jpg");
+	charaex[2] = LoadGraph("cardimage/キャラ3.jpg");
+	charaex[3] = LoadGraph("cardimage/キャラ4.jpg");
+	charaex[4] = LoadGraph("cardimage/キャラ5.jpg");
+	charaex[5] = LoadGraph("cardimage/キャラ6.jpg");
+	charaex[6] = LoadGraph("cardimage/キャラ7.jpg");
 
 	back[0] = LoadGraph("cardimage/背景1.png");
 	back[1] = LoadGraph("cardimage/背景2.png");
@@ -153,36 +153,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			ClearDrawScreen();
 			DrawBox(0, 0, window_y * 3 / 4, window_y * 3 / 4, GetColor(0, 0, 0), true);
 			DrawBox(0, window_y * 3 / 4, window_y * 3 / 4, window_y, GetColor(255, 255, 255), true);
-			if (selection == 1) {
-				DrawExtendGraph(0, 0, window_y * 3 / 4, window_y * 3 / 4, charaex1, true);
-				DrawExtendGraph(window_y + 1, 0, window_x, window_y + 1, chara1, true);
-			}
-			else if (selection == 2) {
-				DrawExtendGraph(0, 0, window_y * 3 / 4, window_y * 3 / 4, charaex2, true);
-				DrawExtendGraph(window_y + 1, 0, window_x, window_y + 1, chara2, true);
-			}
-			else if (selection == 3) {
-				DrawExtendGraph(0, 0, window_y * 3 / 4, window_y * 3 / 4, charaex3, true);
-				DrawExtendGraph(window_y + 1, 0, window_x, window_y + 1, chara3, true);
-			}
-			else if (selection == 4) {
-				DrawExtendGraph(0, 0, window_y * 3 / 4, window_y * 3 / 4, charaex4, true);
-				DrawExtendGraph(window_y + 1, 0, window_x, window_y + 1, chara4, true);
-			}
-			else if (selection == 5) {
-				DrawExtendGraph(0, 0, window_y * 3 / 4, window_y * 3 / 4, charaex5, true);
-				DrawExtendGraph(window_y + 1, 0, window_x, window_y + 1, chara5, true);
-			}
-			else if (selection == 6) {
-				DrawExtendGraph(0, 0, window_y * 3 / 4, window_y * 3 / 4, charaex6, true);
-				DrawExtendGraph(window_y + 1, 0, window_x, window_y + 1, chara6, true);
-			}
-			else if (selection == 7) {
-				DrawExtendGraph(0, 0, window_y * 3 / 4, window_y * 3 / 4, charaex7, true);
-				DrawExtendGraph(window_y + 1, 0, window_x, window_y + 1, chara7, true);
-			}
-			DrawExtendGraph((window_y * 3 / 4) * 1 / 5, window_y * 8 / 10, (window_y * 3 / 4) * 2 / 5, window_y * 9 / 10, red_botan, true);
-			DrawExtendGraph((window_y * 3 / 4) * 3 / 5, window_y * 8 / 10, (window_y * 3 / 4) * 4 / 5, window_y * 9 / 10, blue_botan, true);
+			DrawExtendGraph(0, 0, window_y * 3 / 4, window_y * 3 / 4, charaex[selection], true);
+			DrawExtendGraph(window_y + 1, 0, window_x, window_y + 1, chara[selection], true);
+			DrawExtendGraph((window_y * 3 / 4) * 1 / 5, window_y * 8 / 10, (window_y * 3 / 4) * 2 / 5, window_y * 9 / 10, red_botan, false);
+			DrawExtendGraph((window_y * 3 / 4) * 3 / 5, window_y * 8 / 10, (window_y * 3 / 4) * 4 / 5, window_y * 9 / 10, blue_botan, false);
 			goback = input();
 			if (goback == 1) {
 				chara_select = 2;
@@ -199,52 +173,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	}
 	ClearDrawScreen();
 	DrawExtendGraph(0, 0, window_x, window_y, vs, true);
-	if (selection == 1) {
-		DrawExtendGraph((window_x/10)*0.5, 0, (window_x/10)*3.5, window_y + 1, chara1, true);
-	}
-	else if (selection == 2) {
-		DrawExtendGraph((window_x / 10) * 0.5, 0, (window_x / 10) * 3.5, window_y + 1, chara2, true);
-	}
-	else if (selection == 3) {
-		DrawExtendGraph((window_x / 10) * 0.5, 0, (window_x / 10) * 3.5, window_y + 1, chara3, true);
-	}
-	else if (selection == 4) {
-		DrawExtendGraph((window_x / 10) * 0.5, 0, (window_x / 10) * 3.5, window_y + 1, chara4, true);
-	}
-	else if (selection == 5) {
-		DrawExtendGraph((window_x / 10) * 0.5, 0, (window_x / 10) * 3.5, window_y + 1, chara5, true);
-	}
-	else if (selection == 6) {
-		DrawExtendGraph((window_x / 10) * 0.5, 0, (window_x / 10) * 3.5, window_y + 1, chara6, true);
-	}
-	else if (selection == 7) {
-		DrawExtendGraph((window_x / 10) * 0.5, 0, (window_x / 10) * 3.5, window_y + 1, chara7, true);
-	}
+	DrawExtendGraph((window_x / 10) * 0.5, 0, (window_x / 10) * 3.5, window_y + 1, chara[selection], true);
 	WaitTimer(10);
 	SetFontSize(150);
 	while (1) {
 		ClearDrawScreen();
-		if (selection == 1) {
-			DrawExtendGraph(0, 0, window_x, window_y, back[0], true);
-		}
-		else if (selection == 2) {
-			DrawExtendGraph(0, 0, window_x, window_y, back[1], true);
-		}
-		else if (selection == 3) {
-			DrawExtendGraph(0, 0, window_x, window_y, back[2], true);
-		}
-		else if (selection == 4) {
-			DrawExtendGraph(0, 0, window_x, window_y, back[3], true);
-		}
-		else if (selection == 5) {
-			DrawExtendGraph(0, 0, window_x, window_y, back[4], true);
-		}
-		else if (selection == 6) {
-			DrawExtendGraph(0, 0, window_x, window_y, back[5], true);
-		}
-		else if (selection == 7) {
-			DrawExtendGraph(0, 0, window_x, window_y, back[6], true);
-		}
+		DrawExtendGraph(0, 0, window_x, window_y, back[selection], true);
 		DrawExtendGraph(0, 0, window_x, window_y, playmat, true);
 		DrawFormatString(window_x*7 / 15, 0,GetColor(0, 0, 0),"%d", round);
 
@@ -292,7 +226,7 @@ int input() {
 			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 				for (int i = 0; i < 7; i++) {
 					if (Chara_Card[i]->mouse_in()) {
-						return i + 1;
+						return i;
 					}
 				}
 
