@@ -4,7 +4,7 @@
 #include <vector>
 #include "Area.h"
 
-int window_x, window_y, color;
+int color;
 int x, y;
 int mouseX, mouseY;
 int gamestep = 0;
