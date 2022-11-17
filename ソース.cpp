@@ -121,7 +121,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Chara_Card[6] = new ConstArea((3.5 / 5.0), (3.5 / 5.0), x, y);
 	Charaenter = new WindowArea2(3.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
 	Charaback = new WindowArea2(9.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
-	Skill = new CircleArea(9.0 / 10.0,4.0 / 5.0, 256);
+	Skill = new CircleArea(9.0 / 10.0,4.0 / 5.0, 170);
 
 
 	connection_select = input();
@@ -252,10 +252,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0, skill_off, true);
 		}
 		else if (skillbt == 1) {
-			DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0, skilled, true);
+			DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0, skill_on, true);
 		}
 		else if (skillbt == 2) {
-
+			DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0, skilled, true);
 		}
 		skillbt = input();
 		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
