@@ -94,7 +94,7 @@ public:
 };
 WindowArea* HostButtun, * GuestButton;
 WindowArea2*Charaenter, * Charaback;
-ConstArea* Card1,* Card2,* Card3,* Card4,* Card5, * Card6, * Card7;
+ConstArea* Card[7];
 CircleArea* Skill;
 int input(void) {
 	WaitKey();
@@ -113,27 +113,10 @@ int input(void) {
 	else if (gamestep == 1) {
 		while (1) {
 			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-				GetMousePoint(&mouseX, &mouseY);
-				if (Card1->mouse_in()) {
-					return 1;
-				}
-				else if (Card2->mouse_in()) {
-					return 2;
-				}
-				else if (Card3->mouse_in()) {
-					return 3;
-				}
-				else if (Card4->mouse_in()) {
-					return 4;
-				}
-				else if (Card5->mouse_in()) {
-					return 5;
-				}
-				else if (Card6->mouse_in()) {
-					return 6;
-				}
-				else if (Card7->mouse_in()) {
-					return 7;
+				for(int i=0;i<7;i++){
+					if (Card[i]->mouse_in()) {
+						return i+1;
+					}
 				}
 				
 			}
@@ -263,13 +246,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	HostButtun = new WindowArea(1.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
 	GuestButton = new WindowArea(3.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
-	Card1 = new ConstArea((1.0 / 5.0) - (x / 2),(1.5 / 5.0) - (y / 2), x, y);
-	Card2 = new ConstArea((2.0 / 5.0) - (x / 2),(1.5 / 5.0) - (y / 2), x, y);
-	Card3 = new ConstArea((3.0 / 5.0) - (x / 2),(1.5 / 5.0) - (y / 2), x, y);
-	Card4 = new ConstArea((4.0 / 5.0) - (x / 2),(1.5 / 5.0) - (y / 2), x, y);
-	Card5 = new ConstArea((1.5 / 5.0) - (x / 2),(3.5 / 5.0) - (y / 2), x, y);
-	Card6 = new ConstArea((2.5 / 5.0) - (x / 2),(3.5 / 5.0) - (y / 2), x, y);
-	Card7 = new ConstArea((3.5 / 5.0) - (x / 2),(3.5 / 5.0) - (y / 2), x, y);
+	Card[0] = new ConstArea((1.0 / 5.0) - (x / 2), (1.5 / 5.0) - (y / 2), x, y);
+	Card[1] = new ConstArea((2.0 / 5.0) - (x / 2), (1.5 / 5.0) - (y / 2), x, y);
+	Card[2] = new ConstArea((3.0 / 5.0) - (x / 2), (1.5 / 5.0) - (y / 2), x, y);
+	Card[3] = new ConstArea((4.0 / 5.0) - (x / 2), (1.5 / 5.0) - (y / 2), x, y);
+	Card[4] = new ConstArea((1.5 / 5.0) - (x / 2), (3.5 / 5.0) - (y / 2), x, y);
+	Card[5] = new ConstArea((2.5 / 5.0) - (x / 2), (3.5 / 5.0) - (y / 2), x, y);
+	Card[6] = new ConstArea((3.5 / 5.0) - (x / 2), (3.5 / 5.0) - (y / 2), x, y);
 	Charaenter = new WindowArea2(3.0 / 20.0, 3.0 / 4.0, 1.0 / 20.0, 1.0 / 4.0);
 	Charaback = new WindowArea2(9.0 / 20.0, 3.0 / 4.0, 1.0 / 20.0, 1.0 / 4.0);
 	Skill = new CircleArea(9.0 / 10.0,4.0 / 5.0, 256);
