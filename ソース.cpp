@@ -123,6 +123,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Charaback = new WindowArea2(9.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
 	Skill = new CircleArea(9.0 / 10.0,4.0 / 5.0, 256);
 
+	HostButtun->DrawBox(GetColor(255, 0, 255), true);
+	GuestButton->DrawBox(GetColor(255, 255, 0), true);
 
 	connection_select = input();
 	//printfDx("%d", connection_select);
