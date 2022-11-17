@@ -250,7 +250,7 @@ int input() {
 		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 			GetMousePoint(&mouseX, &mouseY);
 			if (Skill->mouse_in()) {
-				return !skillbt;
+				return skillbt;
 			}
 		}
 	}
