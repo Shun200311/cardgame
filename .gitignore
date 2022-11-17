@@ -2,6 +2,8 @@
 # この .gitignore ファイルは Microsoft(R) Visual Studio によって自動的に作成されました。
 ################################################################################
 
-/.vscode/tasks.json
-/.vs/cardgame/v17/Browse.VC.opendb
-/.vs/cardgame/v17/Browse.VC.db-shm
+/.vscode/**
+/.vs/**
+/x64/**
+/Debug/**
+/Log.txt
