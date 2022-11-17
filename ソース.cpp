@@ -103,11 +103,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	DrawExtendGraph(0, 0,window_x+1,window_y+1, title, true);
 
-	DrawBox((window_x / 5) * 1, (window_y / 6) * 4, (window_x / 5) * 2, (window_y / 6) * 5, GetColor(255, 0, 255), true);
-	DrawBox((window_x / 5) * 3, (window_y / 6) * 4, (window_x / 5) * 4, (window_y / 6) * 5, GetColor(255, 255, 0), true);
 	DrawBox(0, 0, 100, 100, GetColor(0, 0, 0), true);
-	DrawString((window_x / 5) * 1, (window_y / 6) * 4, "ホスト", GetColor(0, 0, 0));
-	DrawString((window_x / 5) * 3, (window_y / 6) * 4, "ゲスト", GetColor(0, 0, 0));
 
 
 	HostButtun = new WindowArea(1.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
@@ -125,6 +121,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	HostButtun->DrawBox(GetColor(255, 0, 255), true);
 	GuestButton->DrawBox(GetColor(255, 255, 0), true);
+	DrawString((window_x / 5) * 1, (window_y / 6) * 4, "ホスト", GetColor(0, 0, 0));
+	DrawString((window_x / 5) * 3, (window_y / 6) * 4, "ゲスト", GetColor(0, 0, 0));
 
 	connection_select = input();
 	//printfDx("%d", connection_select);
@@ -157,8 +155,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			(new WindowArea2(0, 3.0 / 4.0, 3.0 / 4.0, 1))->DrawBox(GetColor(255, 255, 255), true);
 			(new WindowArea2(0, 0, 3.0 / 4.0, 3.0 / 4.0))->DrawExtendGraph(charaex[selection]);
 			DrawExtendGraph(window_y + 1, 0, window_x, window_y + 1, chara[selection], true);
-			DrawExtendGraph((window_y * 3 / 4) * 1 / 5, window_y * 8 / 10, (window_y * 3 / 4) * 2 / 5, window_y * 9 / 10, red_botan, false);
-			DrawExtendGraph((window_y * 3 / 4) * 3 / 5, window_y * 8 / 10, (window_y * 3 / 4) * 4 / 5, window_y * 9 / 10, blue_botan, false);
+			Charaenter->DrawExtendGraph(red_botan);
+			Charaback->DrawExtendGraph(blue_botan);
 			goback = input();
 			if (goback == 1) {
 				chara_select = 2;
@@ -252,7 +250,7 @@ int input() {
 		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 			GetMousePoint(&mouseX, &mouseY);
 			if (Skill->mouse_in()) {
-				return ~skillbt;
+				return !skillbt;
 			}
 		}
 	}
