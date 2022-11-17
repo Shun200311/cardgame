@@ -9,7 +9,62 @@ int x, y;
 int mouseX, mouseY;
 int gamestep = 0;
 int skillbt = 0;
+int dx = 0;
 int eriaX, eriaY;
+};
+class WindowArea2 {
+public:
+	int startX, startY, endX, endY;
+	WindowArea2(float posX, float posY, float sizeX, float sizeY) {
+		this->startX = (float)window_y * posX;
+		this->startY = (float)window_y * posY;
+		this->endX = this->startX + (float)window_y * sizeX;
+		this->endY = this->startY + (float)window_y * sizeY;
+		DrawBox(this->startX, this->startY, this->endX, this->endY, GetColor(255, 0, 0), true);
+	}
+	// マウスのクリック位置判定関数
+	bool mouse_in() {
+		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
+	}
+};
+//位置はウィンドウ比、サイズは固定
+class ConstArea {
+public:
+	int startX, startY, endX, endY;
+	ConstArea(float posX, float posY, int sizeX, int sizeY) {
+		this->startX = window_x * posX - (sizeX/2);
+		this->startY = window_y * posY - (sizeY/2);
+		this->endX = this->startX + sizeX;
+		this->endY = this->startY + sizeY;
+	}
+	// マウスのクリック位置判定関数
+	bool mouse_in() {
+		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
+	}
+	void DrawExtend(const TCHAR* path) {
+		DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, LoadGraph(path), true);
+	}
+	void DrawRota(double exRate, const TCHAR* path) {
+		DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, LoadGraph(path), true);
+	}
+};
+//位置はウィンドウ比、サイズは固定
+class CircleArea {
+public:
+	int centerX, centerY, r;
+	CircleArea(float posX, float posY, int size) {
+		this->centerX = window_x * posX;
+		this->centerY = window_y * posY;
+		this->r = size;
+	}
+	// マウスのクリック位置判定関数
+	bool mouse_in() {
+		int mouseX = 0, mouseY = 0;
+		GetMousePoint(&mouseX, &mouseY);
+		dx = (pow(mouseX - centerX,2) + pow(mouseY - centerY,2));
+		return (sqrt(dx)<=r);
+	}
+};
 WindowArea* HostButtun, * GuestButton;
 WindowArea2*Charaenter, * Charaback;
 ConstArea* Chara_Card[7];
