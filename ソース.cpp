@@ -151,9 +151,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//WaitKey();
 		case 1:
 			ClearDrawScreen();
-			DrawBox(0, 0, window_y * 3 / 4, window_y * 3 / 4, GetColor(0, 0, 0), true);
-			DrawBox(0, window_y * 3 / 4, window_y * 3 / 4, window_y, GetColor(255, 255, 255), true);
-			DrawExtendGraph(0, 0, window_y * 3 / 4, window_y * 3 / 4, charaex[selection], true);
+			(new WindowArea2(0, 0, 3.0 / 4.0, 1))->DrawBox(GetColor(0, 0, 0), true);
+			(new WindowArea2(0, 3.0 / 4.0, 3.0 / 4.0, 1))->DrawBox(GetColor(255, 255, 255), true);
+			(new WindowArea2(0, 0, 3.0 / 4.0, 3.0 / 4.0))->DrawExtendGraph(charaex[selection]);
 			DrawExtendGraph(window_y + 1, 0, window_x, window_y + 1, chara[selection], true);
 			DrawExtendGraph((window_y * 3 / 4) * 1 / 5, window_y * 8 / 10, (window_y * 3 / 4) * 2 / 5, window_y * 9 / 10, red_botan, false);
 			DrawExtendGraph((window_y * 3 / 4) * 3 / 5, window_y * 8 / 10, (window_y * 3 / 4) * 4 / 5, window_y * 9 / 10, blue_botan, false);
@@ -250,12 +250,7 @@ int input() {
 		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 			GetMousePoint(&mouseX, &mouseY);
 			if (Skill->mouse_in()) {
-				if (skillbt == 0) {
-					return 1;
-				}
-				else if (skillbt == 1) {
-					return 0;
-				}
+				return ~skillbt;
 			}
 		}
 	}

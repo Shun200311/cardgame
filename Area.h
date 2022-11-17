@@ -21,11 +21,11 @@ public:
 	bool mouse_in() {
 		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
 	}
-	int DrawExtendGraph(const TCHAR* path) {
-		return DxLib::DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, LoadGraph(path), true);
+	int DrawExtendGraph(int GrHandle) {
+		return DxLib::DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, GrHandle, true);
 	}
-	int DrawRotaGraph(double exRate, const TCHAR* path) {
-		return DxLib::DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, LoadGraph(path), true);
+	int DrawRotaGraph(double exRate, int GrHandle) {
+		return DxLib::DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, GrHandle, true);
 	}
 	int DrawBox(unsigned int color, int fillflg) {
 		return DxLib::DrawBox(this->startX, this->startY, this->endX, this->endY, color, fillflg);
@@ -45,6 +45,15 @@ public:
 	bool mouse_in() {
 		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
 	}
+	int DrawExtendGraph(int GrHandle) {
+		return DxLib::DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, GrHandle, true);
+	}
+	int DrawRotaGraph(double exRate, int GrHandle) {
+		return DxLib::DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, GrHandle, true);
+	}
+	int DrawBox(unsigned int color, int fillflg) {
+		return DxLib::DrawBox(this->startX, this->startY, this->endX, this->endY, color, fillflg);
+	}
 };
 //位置はウィンドウ比、サイズは固定
 class ConstArea {
@@ -60,11 +69,11 @@ public:
 	bool mouse_in() {
 		return mouse_in_area(this->startX, this->startY, this->endX, this->endY);
 	}
-	int DrawExtendGraph(const TCHAR* path) {
-		return DxLib::DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, LoadGraph(path), true);
+	int DrawExtendGraph(int GrHandle) {
+		return DxLib::DrawExtendGraph(this->startX, this->startY, this->endX, this->endY, GrHandle, true);
 	}
-	int DrawRotaGraph(double exRate, const TCHAR* path) {
-		return DxLib::DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, LoadGraph(path), true);
+	int DrawRotaGraph(double exRate, int GrHandle) {
+		return DxLib::DrawRotaGraph((this->startX + this->endX) / 2, (this->startY + this->endY) / 2, exRate, 0, GrHandle, true);
 	}
 	int DrawBox(unsigned int color, int fillflg) {
 		return DxLib::DrawBox(this->startX, this->startY, this->endX, this->endY, color, fillflg);
