@@ -84,7 +84,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	card[2] = LoadGraph("cardimage/1.5choki.png");
 	card[3] = LoadGraph("cardimage/poisongu-.png");
 	card[4] = LoadGraph("cardimage/poisonpa-.png");
-	card[5] = LoadGraph("cardimage/1.5gu-.png");
+	card[5] = LoadGraph("cardimage/poisonchoki.png");
 	card[6] = LoadGraph("cardimage/1.5gu-.png");
 	card[7] = LoadGraph("cardimage/1.5gu-.png");
 	card[8] = LoadGraph("cardimage/1.5gu-.png");
