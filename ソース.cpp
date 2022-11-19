@@ -196,6 +196,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			round++;
 			printfDx("%d", gamestep);
 		}
+
+
 		if (round == 6) {
 			break;
 		}
