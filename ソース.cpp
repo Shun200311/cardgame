@@ -6,6 +6,7 @@
 #include <vector>
 #include "Area.h"
 
+
 int color;
 int x, y;
 int mouseX, mouseY;
@@ -14,7 +15,7 @@ int skillbt = 0;
 int eriaX, eriaY;
 WindowArea* HostButtun, * GuestButton;
 WindowArea2*Charaenter, * Charaback;
-ConstArea* Chara_Card[7];
+ConstArea* Chara_Card[7], * hand[7];
 CircleArea* Skill;
 int input();
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -31,9 +32,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int chara[7], chara7_2;
 	int charaex[7];
 	int card[18];
-	int hand;
 	int handcard[7] = { 0 };
-	int random=rand()% 2147483645;
+	int random=rand()% 20000;
 	int back[8];
 	int red_botan;
 	int blue_botan;
@@ -52,6 +52,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	int skill_on, skill_off=0, skilled;
 	int skillsizeX = 0, skillsizeY = 0;
+	int cardsizeX = 0, cardsizeY = 0;
 
 	title = LoadGraph("cardimage/title.png");
 	connection_wait= LoadGraph("cardimage/通信待ち3.png");
@@ -103,13 +104,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	card[15] = LoadGraph("cardimage/tgu-.png");
 	card[16] = LoadGraph("cardimage/tpa-.png");
 	card[17] = LoadGraph("cardimage/tchoki.png");
+
 	red_botan = LoadGraph("cardimage/再考決定ボタン.png");
 	blue_botan = LoadGraph("cardimage/再考戻るボタン.png");
 	skill_on = LoadGraph("cardimage/skill_on.png");
 	skill_off = LoadGraph("cardimage/skill_off.png");
 	skilled = LoadGraph("cardimage/skilled.png");
 	GetGraphSize(skill_off, &skillsizeX, &skillsizeY);
-
+	GetGraphSize(card[0], &cardsizeX, &cardsizeY);
 	GetScreenState(&window_x, &window_y, &color);
 	GetGraphSize(backcard, &x, &y);
 	SetMouseDispFlag(TRUE);
@@ -118,11 +120,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	DrawExtendGraph(0, 0,window_x+1,window_y+1, title, true);
 
-	DrawBox(0, 0, 100, 100, GetColor(0, 0, 0), true);
-
-
-	HostButtun = new WindowArea(1.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
-	GuestButton = new WindowArea(3.0 / 5.0, 4.0 / 6.0, 1.0 / 5.0, 1.0 / 6.0);
+	HostButtun = new WindowArea(1.0 / 35.0, 5.0 / 6.0, 1.0 / 5.0, 1.0 / 8.0);
+	GuestButton = new WindowArea(27.0 / 35.0, 5.0 / 6.0, 1.0 / 5.0, 1.0 / 8.0);
 	Chara_Card[0] = new ConstArea((1.0 / 5.0), (1.5 / 5.0), x, y);
 	Chara_Card[1] = new ConstArea((2.0 / 5.0), (1.5 / 5.0), x, y);
 	Chara_Card[2] = new ConstArea((3.0 / 5.0), (1.5 / 5.0), x, y);
@@ -130,14 +129,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Chara_Card[4] = new ConstArea((1.5 / 5.0), (3.5 / 5.0), x, y);
 	Chara_Card[5] = new ConstArea((2.5 / 5.0), (3.5 / 5.0), x, y);
 	Chara_Card[6] = new ConstArea((3.5 / 5.0), (3.5 / 5.0), x, y);
+
+	hand[0] = new ConstArea((1.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
+
 	Charaenter = new WindowArea2(3.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
 	Charaback = new WindowArea2(9.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
 	Skill = new CircleArea(9.0 / 10.0,4.0 / 5.0, 170);
-
-	HostButtun->DrawBox(GetColor(255, 0, 255), true);
-	GuestButton->DrawBox(GetColor(255, 255, 0), true);
-	DrawString((window_x / 5) * 1, (window_y / 6) * 4, "ホスト", GetColor(0, 0, 0));
-	DrawString((window_x / 5) * 3, (window_y / 6) * 4, "ゲスト", GetColor(0, 0, 0));
 
 	connection_select = input();
 	//printfDx("%d", connection_select);
@@ -193,12 +190,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	SetFontSize(150);
 	srand(random);
 	for (int i = 0; i < 7; i++) {
-		handcard[i] = card[2];
+		handcard[i] = rand()%18;
 	}
 	while (1) {
 		ClearDrawScreen();
 		DrawExtendGraph(0, 0, window_x, window_y, back[selection], true);
 		DrawExtendGraph(0, 0, window_x, window_y, playmat, true);
+		for (int i = 0; i < 7-round; i++) {
+			DrawRotaGraph((window_x / 10) * (i+1), (window_y / 5) * 4.3, 0.2, 0.0, card[handcard[i]], true);
+		}
 		DrawFormatString(window_x*7 / 15, 0,GetColor(0, 0, 0),"%d", round);
 
 		if (skillbt == 0) {
@@ -215,15 +215,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			round++;
 			printfDx("%d", gamestep);
 		}
-		DrawRotaGraph(window_x / 2, window_y / 2, 0.75, 0, card[0], true);
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < 7; j++) {
-				if (handcard[i] == j) {
-					hand = handcard[i];	
-				}
-			}
-		}
-		if (round == 6) {
+		DrawRotaGraph((window_x / 5) * 1, (window_y / 5) * 1.5, 1, 0.0, card[2], true);
+		if (round == 3) {
 			break;
 		}
 	}
