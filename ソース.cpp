@@ -14,6 +14,7 @@ int skillbt = 0;
 int eriaX, eriaY;
 int handcard[7] = { 0 };
 int used[7] = { 0 };
+int turn = 0;
 WindowArea* HostButtun, * GuestButton;
 WindowArea2*Charaenter, * Charaback;
 ConstArea* Chara_Card[7], * hand[7];
@@ -48,7 +49,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int backcard;
 	int cardselect_back;
 	int chara_select = 0;
-	int round = 0;
 
 	int skill_on, skill_off=0, skilled;
 	int skillsizeX = 0, skillsizeY = 0;
@@ -196,7 +196,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	WaitTimer(10);
 	SetFontSize(150);
 	srand(random);
-	for (int i = 0; i < 7; i++) {
+	for (int i = 0; i < 18; i++) {
 		handcard[i] = rand() % 18;
 		for (int j = 0; j < i; j++) {
 			if (handcard[i] == handcard[j]) {
@@ -209,10 +209,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ClearDrawScreen();
 		DrawExtendGraph(0, 0, window_x, window_y, back[selection], true);
 		DrawExtendGraph(0, 0, window_x, window_y, playmat, true);
-		for (int i = 0; i < 7-round; i++) {
+		for (int i = 0; i < 18-turn; i++) {
 			DrawRotaGraph((window_x / 10) * (i+1), (window_y / 5) * 4.3, 0.2, 0.0, card[handcard[i]], true);
 		}
-		DrawFormatString(window_x*7 / 15, 0,GetColor(0, 0, 0),"%d", round);
 
 		if (skillbt == 0) {
 			DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0, skill_off, true);
@@ -224,13 +223,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0, skilled, true);
 		}
 		skillbt = input();
-		used[round] = input();
+		//used[turn] = input();
 		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			round++;
+			turn++;
 			printfDx("%d", gamestep);
 		}
 		DrawRotaGraph((window_x / 5) * 1, (window_y / 5) * 1.5, 1, 0.0, card[2], true);
-		if (round == 3) {
+		if (turn == 3) {
 			break;
 		}
 	}
@@ -280,11 +279,7 @@ int input() {
 				if (Skill->mouse_in()) {
 					return !skillbt;
 				}
-				for (int i = 0; i <= 7;i++) {
-					if (hand[i]->mouse_in()) {
-						return handcard[i];
-					}
-				}
+
 			}
 		}
 	}
