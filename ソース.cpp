@@ -6,13 +6,14 @@
 #include <vector>
 #include "Area.h"
 
-
 int color;
 int x, y;
 int mouseX, mouseY;
 int gamestep = 0;
 int skillbt = 0;
 int eriaX, eriaY;
+int handcard[7] = { 0 };
+int used[7] = { 0 };
 WindowArea* HostButtun, * GuestButton;
 WindowArea2*Charaenter, * Charaback;
 ConstArea* Chara_Card[7], * hand[7];
@@ -32,8 +33,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int chara[7], chara7_2;
 	int charaex[7];
 	int card[18];
-	int handcard[7] = { 0 };
-	int used[7] = { 0 };
 	int random=rand()% 20000;
 	int back[8];
 	int red_botan;
@@ -225,6 +224,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0, skilled, true);
 		}
 		skillbt = input();
+		used[round] = input();
 		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 			round++;
 			printfDx("%d", gamestep);
@@ -242,9 +242,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 }
 
 int input() {
-	WaitKey();
-	if (gamestep == 0) {
-		while (1) {
+	while (1) {
+		WaitKey();
+		if (gamestep == 0) {
 			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 				if (HostButtun->mouse_in()) {
 					return 1;
@@ -254,9 +254,7 @@ int input() {
 				}
 			}
 		}
-	}
-	else if (gamestep == 1) {
-		while (1) {
+		else if (gamestep == 1) {
 			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
 				for (int i = 0; i < 7; i++) {
 					if (Chara_Card[i]->mouse_in()) {
@@ -265,30 +263,28 @@ int input() {
 				}
 
 			}
-
 		}
-	}
-	else if (gamestep == 2) {
-		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			GetMousePoint(&mouseX, &mouseY);
-			if (Charaenter->mouse_in()) {
-				return 1;
-			}
-			else if (Charaback->mouse_in()) {
-				return 2;
+		else if (gamestep == 2) {
+			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+				if (Charaenter->mouse_in()) {
+					return 1;
+				}
+				else if (Charaback->mouse_in()) {
+					return 2;
+				}
 			}
 		}
-	}
-	//DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0,
-	else if (gamestep == 3) {
-		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			GetMousePoint(&mouseX, &mouseY);
-			if (Skill->mouse_in()) {
-				return !skillbt;
-			}
-			if (hand[0]->mouse_in()) {
-				//
-
+		//DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0,
+		else if (gamestep == 3) {
+			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
+				if (Skill->mouse_in()) {
+					return !skillbt;
+				}
+				for (int i = 0; i <= 7;i++) {
+					if (hand[i]->mouse_in()) {
+						return handcard[i];
+					}
+				}
 			}
 		}
 	}
