@@ -1,5 +1,7 @@
 #include <DxLib.h>
 #include <math.h>
+#include<stdlib.h>
+#include <time.h>
 #include <string>
 #include <vector>
 #include "Area.h"
@@ -19,6 +21,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//ChangeWindowMode(false);
 	SetGraphMode(1920, 1080,32);
 	DxLib_Init();
+	srand((unsigned int)time(NULL)); // 現在時刻の情報で初期化
 	char StrBuf[256];    // データバッファ
 	int receive=0;
 	int receive2;
@@ -28,6 +31,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int chara[7], chara7_2;
 	int charaex[7];
 	int card[18];
+	int hand;
+	int handcard[7] = { 0 };
+	int random=rand()% 2147483645;
 	int back[8];
 	int red_botan;
 	int blue_botan;
@@ -185,6 +191,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	DrawExtendGraph((window_x / 10) * 0.5, 0, (window_x / 10) * 3.5, window_y + 1, chara[selection], true);
 	WaitTimer(10);
 	SetFontSize(150);
+	srand(random);
+	for (int i = 0; i < 7; i++) {
+		handcard[i] = card[2];
+	}
 	while (1) {
 		ClearDrawScreen();
 		DrawExtendGraph(0, 0, window_x, window_y, back[selection], true);
@@ -205,8 +215,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			round++;
 			printfDx("%d", gamestep);
 		}
-
-
+		DrawRotaGraph(window_x / 2, window_y / 2, 0.75, 0, card[0], true);
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 7; j++) {
+				if (handcard[i] == j) {
+					hand = handcard[i];	
+				}
+			}
+		}
 		if (round == 6) {
 			break;
 		}
