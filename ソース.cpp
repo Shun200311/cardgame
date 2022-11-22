@@ -33,6 +33,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int charaex[7];
 	int card[18];
 	int handcard[7] = { 0 };
+	int used[7] = { 0 };
 	int random=rand()% 20000;
 	int back[8];
 	int red_botan;
@@ -131,6 +132,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Chara_Card[6] = new ConstArea((3.5 / 5.0), (3.5 / 5.0), x, y);
 
 	hand[0] = new ConstArea((1.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
+	hand[1] = new ConstArea((2.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
+	hand[2] = new ConstArea((3.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
+	hand[3] = new ConstArea((4.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
+	hand[4] = new ConstArea((5.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
+	hand[5] = new ConstArea((6.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
+	hand[6] = new ConstArea((7.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
+
 
 	Charaenter = new WindowArea2(3.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
 	Charaback = new WindowArea2(9.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
@@ -190,7 +198,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	SetFontSize(150);
 	srand(random);
 	for (int i = 0; i < 7; i++) {
-		handcard[i] = rand()%18;
+		handcard[i] = rand() % 18;
+		for (int j = 0; j < i; j++) {
+			if (handcard[i] == handcard[j]) {
+				i--;
+			}
+		}
+
 	}
 	while (1) {
 		ClearDrawScreen();
@@ -271,6 +285,10 @@ int input() {
 			GetMousePoint(&mouseX, &mouseY);
 			if (Skill->mouse_in()) {
 				return !skillbt;
+			}
+			if (hand[0]->mouse_in()) {
+				//
+
 			}
 		}
 	}
