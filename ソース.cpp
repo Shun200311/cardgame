@@ -12,20 +12,25 @@ int mouseX, mouseY;
 int gamestep = 0;
 int skillbt = 0;
 int eriaX, eriaY;
-int handcard[7] = { 0 };
-int used[7] = { 0 };
+int handcard[8] = {0};
+int used[5] = { 0 };
 int turn = 0;
+int showcard;
+int vscard;
+int card[18];
+int enemy;
+int go = 0;
 WindowArea* HostButtun, * GuestButton;
 WindowArea2*Charaenter, * Charaback;
 ConstArea* Chara_Card[7], * hand[7];
 CircleArea* Skill;
 int input();
+int show(int c);
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//ChangeWindowMode(false);
 	SetGraphMode(1920, 1080,32);
 	DxLib_Init();
-	srand((unsigned int)time(NULL)); // 現在時刻の情報で初期化
-	char StrBuf[256];    // データバッファ
+	char Buf[256];    // データバッファ
 	int receive=0;
 	int receive2;
 	int connection_select = 0;
@@ -33,7 +38,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int goback=0;
 	int chara[7], chara7_2;
 	int charaex[7];
-	int card[18];
 	int random=rand()% 20000;
 	int back[8];
 	int red_botan;
@@ -41,23 +45,45 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int connection = 0;
 	int connection_wait;
 	int playmat;
-	IPDATA ip;
+
+
+	int mul = 0;
 	int NetHandle, LostHandle;    // ネットワークハンドル
 	int DataLength;        // 受信データ量保存用変数
 	int title;
 	int vs;
+	int damage;
+	int heal;
+	int wincard;
+	int losecard;
+	int drawcard;
 	int backcard;
 	int cardselect_back;
 	int chara_select = 0;
-
+	int judge;
+	int carddamage=0;
+	int poison=0;
+	int mypoison=0;
+	int enepoison=0;
+	int cardheal=0;
 	int skill_on, skill_off=0, skilled;
 	int skillsizeX = 0, skillsizeY = 0;
 	int cardsizeX = 0, cardsizeY = 0;
 
-	title = LoadGraph("cardimage/title.png");
+	int mydamage = 0;
+	int enedamage = 0;
+	int position=0;
+
+	title = LoadGraph("cardimage/タイトル.png");
 	connection_wait= LoadGraph("cardimage/通信待ち3.png");
 	cardselect_back = LoadGraph("cardimage/select_card_back.png");
 	vs = LoadGraph("cardimage/vs.jpg");
+	vscard = LoadGraph("cardimage/VS画面.png");
+	drawcard = LoadGraph("cardimage/引き分け.png");
+	wincard = LoadGraph("cardimage/勝ち.png");
+	losecard = LoadGraph("cardimage/負け.png");
+	damage = LoadGraph("cardimage/damage.png");
+	heal = LoadGraph("cardimage/heal.png");
 	backcard = LoadGraph("cardimage/backcard3.png");
 	playmat = LoadGraph("cardimage/playmat.png");
 	chara[0] = LoadGraph("cardimage/キャラ01.png");
@@ -85,6 +111,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	back[5] = LoadGraph("cardimage/背景6.png");
 	back[6] = LoadGraph("cardimage/背景7.png");
 	back[7] = LoadGraph("cardimage/背景7-2.png");
+
 
 	card[0] = LoadGraph("cardimage/1.5gu-.png");
 	card[1] = LoadGraph("cardimage/1.5pa-.png");
@@ -130,21 +157,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Chara_Card[5] = new ConstArea((2.5 / 5.0), (3.5 / 5.0), x, y);
 	Chara_Card[6] = new ConstArea((3.5 / 5.0), (3.5 / 5.0), x, y);
 
-	hand[0] = new ConstArea((1.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
-	hand[1] = new ConstArea((2.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
-	hand[2] = new ConstArea((3.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
-	hand[3] = new ConstArea((4.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
-	hand[4] = new ConstArea((5.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
-	hand[5] = new ConstArea((6.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
-	hand[6] = new ConstArea((7.0 / 10.0), (4.3 / 5.0), cardsizeX, cardsizeY);
+	hand[0] = new ConstArea((1.0 / 10.0), (4.3 / 5.0), cardsizeX/5, cardsizeY/5);
+	hand[1] = new ConstArea((2.0 / 10.0), (4.3 / 5.0), cardsizeX/5, cardsizeY/5);
+	hand[2] = new ConstArea((3.0 / 10.0), (4.3 / 5.0), cardsizeX/5, cardsizeY/5);
+	hand[3] = new ConstArea((4.0 / 10.0), (4.3 / 5.0), cardsizeX/5, cardsizeY/5);
+	hand[4] = new ConstArea((5.0 / 10.0), (4.3 / 5.0), cardsizeX/5, cardsizeY/5);
+	hand[5] = new ConstArea((6.0 / 10.0), (4.3 / 5.0), cardsizeX/5, cardsizeY/5);
+	hand[6] = new ConstArea((7.0 / 10.0), (4.3 / 5.0), cardsizeX/5, cardsizeY/5);
 
 
 	Charaenter = new WindowArea2(3.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
 	Charaback = new WindowArea2(9.0 / 20.0, 8.0 / 10.0, 3.0 / 20.0, 1.0 / 10.0);
 	Skill = new CircleArea(9.0 / 10.0,4.0 / 5.0, 170);
 
-	connection_select = input();
-	//printfDx("%d", connection_select);
+	WaitKey();
 	gamestep=1;
 
 	while (chara_select < 2) {
@@ -194,53 +220,228 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	DrawExtendGraph(0, 0, window_x, window_y, vs, true);
 	DrawExtendGraph((window_x / 10) * 0.5, 0, (window_x / 10) * 3.5, window_y + 1, chara[selection], true);
 	WaitTimer(10);
-	SetFontSize(150);
+	SetFontSize(120);
 	srand(random);
-	for (int i = 0; i < 18; i++) {
-		handcard[i] = rand() % 18;
+	for (int i = 0; i < 7; i++) {
+		handcard[i] = rand() % 300;
 		for (int j = 0; j < i; j++) {
 			if (handcard[i] == handcard[j]) {
 				i--;
 			}
 		}
-
 	}
 	while (1) {
 		ClearDrawScreen();
-		DrawExtendGraph(0, 0, window_x, window_y, back[selection], true);
+		if (selection == 6 && turn > 2) {
+			DrawExtendGraph(0, 0, window_x, window_y, back[7], true);
+		}
+		else {
+			DrawExtendGraph(0, 0, window_x, window_y, back[selection], true);
+		}
 		DrawExtendGraph(0, 0, window_x, window_y, playmat, true);
-		for (int i = 0; i < 18-turn; i++) {
-			DrawRotaGraph((window_x / 10) * (i+1), (window_y / 5) * 4.3, 0.2, 0.0, card[handcard[i]], true);
+		for (int i = 0; i < 7 - turn; i++) {
+			show(handcard[i]);
+			DrawRotaGraph((window_x / 10) * (i + 1), (window_y / 5) * 4.3, 0.2, 0.0, card[showcard], true);
 		}
+		SetFontSize(120);
+		DrawFormatString(window_x * 7 / 15, window_y / 45, GetColor(0, 0, 0), "%d", turn);
+		if (mydamage < 10) {
+			position = 0;
+		}
+		else if (mydamage < 100) {
+			position = 1;
+		}
+		else {
+			position = 2;
+		}
+		DrawFormatString(window_x * (6 - (position * 0.5)) / 17, window_y / 45, GetColor(0, 0, 0), "%d", mydamage);
 
-		if (skillbt == 0) {
-			DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0, skill_off, true);
+		if (enedamage < 10) {
+			position = 0;
 		}
-		else if (skillbt == 1) {
-			DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0, skill_on, true);
+		else if (enedamage < 100) {
+			position = 1;
 		}
-		else if (skillbt == 2) {
-			DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0, skilled, true);
+		else {
+			position = 2;
 		}
-		skillbt = input();
-		//used[turn] = input();
-		if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-			turn++;
-			printfDx("%d", gamestep);
+		DrawFormatString(window_x * (10.8 - (position * 0.5)) / 17, window_y / 45, GetColor(0, 0, 0), "%d", enedamage);
+
+		//if (skillbt == 0) {
+		if (selection == 6&& turn > 2) {
+			DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.5, 0, chara7_2, true);
 		}
-		DrawRotaGraph((window_x / 5) * 1, (window_y / 5) * 1.5, 1, 0.0, card[2], true);
-		if (turn == 3) {
+		else {
+			DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.5, 0, chara[selection], true);
+		}
+		//}
+		//else if (skillbt == 1) {
+		//	DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0, skill_on, true);
+		//}
+		//else if (skillbt == 2) {
+		//	DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0, skilled, true);
+		//}
+			input();
+			WaitKey();
+		if (used[turn] < 100) {
+			if (enemy < 100) {
+				DrawExtendGraph(0, 0, window_x, window_y, drawcard, true);
+				judge = 0;
+			}
+			else if (enemy < 200) {
+				DrawExtendGraph(0, 0, window_x, window_y, wincard, true);
+				judge = 1;
+			}
+			else if (enemy < 300) {
+				DrawExtendGraph(0, 0, window_x, window_y, losecard, true);
+				judge = 2;
+			}
+		}
+		else if (used[turn] < 200) {
+			if (enemy < 100) {
+				DrawExtendGraph(0, 0, window_x, window_y, losecard, true);
+				judge = 2;
+			}
+			else if (enemy < 200) {
+				DrawExtendGraph(0, 0, window_x, window_y, drawcard, true);
+				judge = 0;
+			}
+			else if (enemy < 300) {
+				DrawExtendGraph(0, 0, window_x, window_y, wincard, true);
+				judge = 1;
+			}
+		}
+		else if (used[turn] < 300) {
+			if (enemy < 100) {
+				DrawExtendGraph(0, 0, window_x, window_y, wincard, true);
+				judge = 1;
+			}
+			else if (enemy < 200) {
+				DrawExtendGraph(0, 0, window_x, window_y, losecard, true);
+				judge = 2;
+			}
+			else if (enemy < 300) {
+				DrawExtendGraph(0, 0, window_x, window_y, drawcard, true);
+				judge = 0;
+			}
+		}
+		WaitKey();
+		if (judge == 1) {
+			show(used[turn]);
+		}
+		else if (judge == 2) {
+			show(enemy);
+		}
+		if (showcard == 15 || showcard == 16 || showcard == 17) {
+			carddamage = 100;
+		}
+		else if (showcard == 0 || showcard == 1 || showcard == 2) {
+			carddamage = 15;
+			mul = 1;
+		}
+		else if (showcard == 3 || showcard == 4 || showcard == 5) {
+			carddamage = 10;
+			poison = 1;
+		}
+		else if (showcard == 6 || showcard == 7 || showcard == 8) {
+			carddamage = 10;
+			skillbt = 0;
+		}
+		else if (showcard == 9 || showcard == 10 || showcard == 11) {
+			carddamage = 5;
+		}
+		else if (showcard == 12 || showcard == 13 || showcard == 14) {
+			cardheal = 10;
+		}
+		SetFontSize(350);
+		if (judge != 0) {
+			if (judge == 1) {
+				if (cardheal == 0) {
+					DrawExtendGraph(0, 0, window_x, window_y, damage, true);
+					DrawFormatString(window_x * 3 / 7, window_y * 5 / 7, GetColor(255, 255, 255), "%d", carddamage + mypoison);
+					DrawRotaGraph((window_x / 4) * 1, window_y / 2, 0.5, 0, card[showcard], true);
+				}
+				else if (cardheal != 0) {
+					DrawExtendGraph(0, 0, window_x, window_y, heal, true);
+					DrawRotaGraph((window_x / 4) * 1, window_y / 2, 0.5, 0, card[showcard], true);
+				}
+			}
+			if (judge == 2) {
+				if (cardheal == 0) {
+					DrawExtendGraph(0, 0, window_x, window_y, damage, true);
+					DrawFormatString(window_x * 3 / 7, window_y * 5 / 7, GetColor(255, 255, 255), "%d", carddamage + enepoison);
+					DrawRotaGraph((window_x / 4) * 1, window_y / 2, 0.5, 0, card[showcard], true);
+				}
+				else if (cardheal != 0) {
+					DrawExtendGraph(0, 0, window_x, window_y, heal, true);
+					DrawRotaGraph((window_x / 4) * 1, window_y / 2, 0.5, 0, card[showcard], true);
+				}
+			}
+			SetFontSize(120);
+			DrawFormatString(window_x * 3 / 7, window_y * 1 / 7, GetColor(255, 255, 255), "基本ダメージ：%d",carddamage);
+			if (judge == 1) {
+				DrawFormatString(window_x * 3 / 7, window_y * 2 / 7, GetColor(255, 255, 255), "毒ダメージ：%d", mypoison);
+			}
+			else if(judge==2){
+				DrawFormatString(window_x * 3 / 7, window_y * 2 / 7, GetColor(255, 255, 255), "毒ダメージ：%d", enepoison);
+			}
+		}
+		WaitKey();
+		if (judge == 1) {
+			enedamage = enedamage + carddamage+enepoison;
+			mydamage = mydamage - cardheal;
+			if (mydamage < 0) {
+				mydamage = 0;
+			}
+		}
+		else if (judge == 2) {
+			mydamage = mydamage + carddamage+mypoison;
+			enedamage = enedamage - cardheal;
+			if (enedamage < 0) {
+				enedamage = 0;
+			}
+		}
+		if (mypoison > 0 || enepoison > 0) {
+			mypoison--;
+			enepoison--;
+			if (mypoison < 0) {
+				mypoison = 0;
+			}
+			if (enepoison < 0) {
+				enepoison = 0;
+			}
+		}
+		if (poison == 1) {
+			if (judge == 1) {
+				mypoison = 2;
+			}
+			else if (judge == 2) {
+				enepoison = 2;
+			}
+			poison = 0;
+		}
+		if(mul=1){
+			if (judge == 1) {
+				enedamage = enedamage * 1.5;
+			}
+			else if (judge == 2) {
+				mydamage = mydamage*1.5;
+			}
+			mul = 0;
+		}
+		cardheal = 0;
+		turn++;
+		if (turn == 5) {
 			break;
 		}
 	}
-
-
 	DxLib_End();
 	return 0;
 
 }
 
 int input() {
+	
 	while (1) {
 		WaitKey();
 		if (gamestep == 0) {
@@ -276,11 +477,88 @@ int input() {
 		//DrawRotaGraph(window_x / 10 * 9, window_y / 5 * 4, 0.75, 0,
 		else if (gamestep == 3) {
 			if (GetMouseInput() & MOUSE_INPUT_LEFT) {
-				if (Skill->mouse_in()) {
-					return !skillbt;
+				//if (Skill->mouse_in()) {
+				//	skillbt= !skillbt;
+				//	return 0;
 				}
-
+				for (int i = 0; i < 7-turn; i++) {
+					if (hand[i]->mouse_in()) {
+						used[turn] = handcard[i];
+						for (int j = i; j < 7 - turn; j++) {
+							handcard[j] = handcard[j + 1];
+						}
+						DrawExtendGraph(0, 0, window_x, window_y, vscard, true);
+						show(used[turn]);
+						DrawRotaGraph((window_x / 4) * 1, window_y / 2, 0.5, 0, card[showcard], true);
+						enemy = rand() % 300;
+						show(enemy);
+						DrawRotaGraph((window_x / 4) * 3, window_y / 2, 0.5, 0, card[showcard], true);
+						go = 1;
+						return 0;
+					}
+				}
 			}
 		}
 	}
+
+
+int show(int c) {
+	//gu-
+	if (c == 0) {
+		showcard = 15;
+	}
+	else if (c < 10) {
+		showcard = 0;
+	}
+	else if (c < 25) {
+		showcard = 3;
+	}
+	else if (c < 40) {
+		showcard = 6;
+	}
+	else if (c < 90) {
+		showcard = 9;
+	}
+	else if (c < 100) {
+		showcard = 12;
+	}
+	//choki
+	else if (c == 100) {
+		showcard = 17;
+	}
+	else if (c < 110) {
+		showcard = 2;
+	}
+	else if (c < 125) {
+		showcard = 5;
+	}
+	else if (c < 140) {
+		showcard = 8;
+	}
+	else if (c < 190) {
+		showcard = 11;
+	}
+	else if (c < 200) {
+		showcard = 14;
+	}
+	//pa-
+	else if (c == 200) {
+		showcard = 16;
+	}
+	else if (c < 210) {
+		showcard = 1;
+	}
+	else if (c < 225) {
+		showcard = 4;
+	}
+	else if (c < 240) {
+		showcard = 7;
+	}
+	else if (c < 290) {
+		showcard = 10;
+	}
+	else if (c < 300) {
+		showcard = 13;
+	}
+	return 0;
 }
