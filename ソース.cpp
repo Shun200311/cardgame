@@ -45,6 +45,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int connection = 0;
 	int connection_wait;
 	int playmat;
+	int you[3];
 
 
 	int mul = 0;
@@ -86,6 +87,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	heal = LoadGraph("cardimage/heal.png");
 	backcard = LoadGraph("cardimage/backcard3.png");
 	playmat = LoadGraph("cardimage/playmat.png");
+	you[0] = LoadGraph("cardimage/you_win.png");
+	you[1] = LoadGraph("cardimage/you_lose.png");
+	you[2]=LoadGraph("cardimage/you_draw.png");
 	chara[0] = LoadGraph("cardimage/ƒLƒƒƒ‰01.png");
 	chara[1] = LoadGraph("cardimage/ƒLƒƒƒ‰02.png");
 	chara[2] = LoadGraph("cardimage/ƒLƒƒƒ‰03.png");
@@ -219,7 +223,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ClearDrawScreen();
 	DrawExtendGraph(0, 0, window_x, window_y, vs, true);
 	DrawExtendGraph((window_x / 10) * 0.5, 0, (window_x / 10) * 3.5, window_y + 1, chara[selection], true);
-	WaitTimer(10);
 	SetFontSize(120);
 	srand(random);
 	for (int i = 0; i < 7; i++) {
@@ -244,7 +247,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			DrawRotaGraph((window_x / 10) * (i + 1), (window_y / 5) * 4.3, 0.2, 0.0, card[showcard], true);
 		}
 		SetFontSize(120);
-		DrawFormatString(window_x * 7 / 15, window_y / 45, GetColor(0, 0, 0), "%d", turn);
+		DrawFormatString(window_x * 7 / 15, window_y / 45, GetColor(0, 0, 0), "%d", turn+1);
 		if (mydamage < 10) {
 			position = 0;
 		}
@@ -388,14 +391,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 		WaitKey();
 		if (judge == 1) {
-			enedamage = enedamage + carddamage+enepoison;
+			enedamage = enedamage + carddamage+mypoison;
 			mydamage = mydamage - cardheal;
 			if (mydamage < 0) {
 				mydamage = 0;
 			}
 		}
 		else if (judge == 2) {
-			mydamage = mydamage + carddamage+mypoison;
+			mydamage = mydamage + carddamage+enepoison;
 			enedamage = enedamage - cardheal;
 			if (enedamage < 0) {
 				enedamage = 0;
@@ -420,7 +423,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 			poison = 0;
 		}
-		if(mul=1){
+		if(mul==1){
 			if (judge == 1) {
 				enedamage = enedamage * 1.5;
 			}
@@ -432,6 +435,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		cardheal = 0;
 		turn++;
 		if (turn == 5) {
+			ClearDrawScreen();
+			if (mydamage == enedamage) {
+				DrawExtendGraph(0, 0, window_x, window_y, you[2], true);
+			}
+			else if (mydamage < enedamage) {
+				DrawExtendGraph(0, 0, window_x, window_y, you[0], true);
+			}
+			else if (mydamage > enedamage) {
+				DrawExtendGraph(0, 0, window_x, window_y, you[1], true);
+			}
+			DrawExtendGraph((window_x / 10) * 0.5, 0, (window_x / 10) * 3.5, window_y + 1, chara[selection], true);
+			WaitTimer(3000);
 			break;
 		}
 	}
